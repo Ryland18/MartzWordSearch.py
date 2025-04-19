@@ -1,7 +1,7 @@
 import csv
 
 def importWords():
-     listOfWords = ["Binary", "Computer", "Hexadecimal", "Bander", "Powershell", "Apps", "Web Sites", "Duck", "VSC", "Poptarts"]
+     listOfWords = ["BINARY", "COMPUTER", "HEXADECIMAL", "BANDER", "POWERSHELL", "APPS", "WEBSITES", "DUCK", "VSC", "POPTARTS"]
      return listOfWords
 
 words = importWords()
@@ -29,42 +29,52 @@ printBoard(board)
 
 def searchHorizontally(listOfWords,board):
      result = []
+     index = []
      for i in range (len(board)):
           horizon = ''.join(board[i])
-          for t in range(len(listOfWords)):
-               if listOfWords[t] in horizon:
+          print(horizon)
+          for t in listOfWords:
+               if t in horizon:
                     result.append(t)
+                    index.append(i)
+     print (f'{result} was found at row {index}')
      return result
 
 
-print(searchHorizontally(words,board))
+searchHorizontally(words,board)
 
 
-def searchVerically(words,board):
-     
+def searchVerically(listOfWords,board):
      item = []
-     
-     for i in range(len(col_widths = [max(len(str(item)) for item in col) for col in zip(*board)])):
+     list = []
+     index = []
+     column = []
+     for i in range(len(board[1])):
           for t in range(len(board)):
-               item.append(board[i][t])
-     #item = []
-     #for i in range(len(board)):
-     #     item.append(board[i][1])
-     #column = ''.join(item)
-     #for i in words:
-     #     if i in column:
-     #          print(i)
-     return
+               list.append(board[t][i])
+          finallvert = ''.join(list)
+          column.append(finallvert)
+          list = []
+     for p in listOfWords:
+          for c in range(len(column)):
+               if p in column[c]:
+                    item.append(p)
+                    index.append(c)
+     print (f'{item} was found at row {index}')
+     return item
+
+
+searchVerically(words,board)
 
 #def searchRightDiagonal(word,board):
 #     item = []
-#     for i in range(len(board)):
-#          item.append(board[i][i])
+#        for i in range(len(board[1])):
+          #list.append(board[i][0+i])
 #     diagnal = ''.join(item)
 #     for i in word:
 #          if 
 
-     return
+     #return
 def searchLeftDiagonal(word,board):
 
 
