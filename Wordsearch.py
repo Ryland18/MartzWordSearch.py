@@ -1,8 +1,12 @@
 import csv
 
 def importWords():
+     
      listOfWords = ["BINARY", "COMPUTER", "HEXADECIMAL", "BANDER", "POWERSHELL", "APPS", "WEBSITES", "DUCK", "VSC", "POPTARTS"]
+     
+     
      return listOfWords
+
 
 words = importWords()
 board = []
@@ -34,7 +38,7 @@ def searchHorizontally(listOfWords,board):
           horizon = ''.join(board[i])
           print(horizon)
           for t in listOfWords:
-               if t in horizon:
+               if t in horizon or t[::-1] in horizon:
                     result.append(t)
                     index.append(i)
      print (f'{result} was found at row {index}')
@@ -57,25 +61,33 @@ def searchVerically(listOfWords,board):
           list = []
      for p in listOfWords:
           for c in range(len(column)):
-               if p in column[c]:
+               if p in column[c] or p[::-1] in column[c]:
                     item.append(p)
                     index.append(c)
-     print (f'{item} was found at row {index}')
+     print (f'{item} was found at column {index}')
      return item
 
 
 searchVerically(words,board)
 
-#def searchRightDiagonal(word,board):
-#     item = []
-#        for i in range(len(board[1])):
-          #list.append(board[i][0+i])
-#     diagnal = ''.join(item)
-#     for i in word:
-#          if 
-
-     #return
-def searchLeftDiagonal(word,board):
+def searchLeftDiagonal(listOfWords,board):
+     item = []
+     word = []
+     index = []
+     group = []
+     for i in range(len(board[1])):     
+          item.append(board[i][i])
+     diagnal = ''.join(item)
+     group.append(diagnal)
+     for i in listOfWords:
+          if i in diagnal or i[::-1] in diagnal:
+               word.append(i) 
+     print(f'{word} was found at diagnal ')
+     return word
+          
+searchLeftDiagonal(words,board)
+          
+def searchRightDiagonal(word,board):
 
 
      return
