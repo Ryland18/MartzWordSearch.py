@@ -34,14 +34,17 @@ printBoard(board)
 def searchHorizontally(listOfWords,board):
      result = []
      index = []
+     startingPH = []
      for i in range (len(board)):
           horizon = ''.join(board[i])
           print(horizon)
           for t in listOfWords:
                if t in horizon or t[::-1] in horizon:
+                    start = horizon.find(t)
                     result.append(t)
                     index.append(i)
-     print (f'{result} was found at row {index}')
+                    startingPH.append(start)
+     print (f'{result} was found at row {index} starting at column {startingPH}')
      return result
 
 
@@ -53,6 +56,7 @@ def searchVerically(listOfWords,board):
      list = []
      index = []
      column = []
+     startingPV=[]
      for i in range(len(board[1])):
           for t in range(len(board)):
                list.append(board[t][i])
@@ -62,9 +66,11 @@ def searchVerically(listOfWords,board):
      for p in listOfWords:
           for c in range(len(column)):
                if p in column[c] or p[::-1] in column[c]:
+                    start = column[c].find(p)  
                     item.append(p)
                     index.append(c)
-     print (f'{item} was found at column {index}')
+                    startingPV.append(start)
+     print (f'{item} was found at column {index} starting at row {startingPV}')
      return item
 
 
@@ -75,6 +81,7 @@ def searchLeftDiagonal(listOfWords,board):
      word = []
      index = []
      group = []
+     startingPDL = []
      for i in range(len(board[1])):     
           item.append(board[i][i])
      diagnal = ''.join(item)
