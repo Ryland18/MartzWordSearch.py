@@ -35,20 +35,26 @@ def searchHorizontally(listOfWords,board):
      result = []
      index = []
      startingPH = []
+     row = []
      for i in range (len(board)):
           horizon = ''.join(board[i])
-          print(horizon)
+          row.append(horizon)
           for t in listOfWords:
                if t in horizon or t[::-1] in horizon:
                     start = horizon.find(t)
                     result.append(t)
                     index.append(i)
                     startingPH.append(start)
-     print (f'{result} was found at row {index} starting at column {startingPH}')
-     return result
+     
+     return result, row, (f'{result} was found at row {index} starting at column {startingPH}')
 
 
 searchHorizontally(words,board)
+
+h= searchHorizontally(words,board)
+
+
+row = h[1]
 
 
 def searchVerically(listOfWords,board):
@@ -70,29 +76,45 @@ def searchVerically(listOfWords,board):
                     item.append(p)
                     index.append(c)
                     startingPV.append(start)
-     print (f'{item} was found at column {index} starting at row {startingPV}')
-     return item
+    
+     return item, column, (f'{item} was found at column {index} starting at row {startingPV}')
+
+R = searchVerically(words,board)
+
+column = R[1]
+
 
 
 searchVerically(words,board)
 
-def searchLeftDiagonal(listOfWords,board):
+def searchLeftDiagonal(listOfWords,board,row, column):
      item = []
      word = []
      index = []
      group = []
      startingPDL = []
-     for i in range(len(board[1])):     
-          item.append(board[i][i])
-     diagnal = ''.join(item)
-     group.append(diagnal)
+     p = 0
+     print(len(row))
+     
+     while p != len(board):
+          for j in range(len(board)):
+               for i in range(len(row)):
+                    if p < 1:
+                         item.append(board[j][j])
+                    else:
+                         item.append(board[j+p - (len(column)+1)][j+p - len(row)])
+               diagnal = ''.join(item)
+               group.append(diagnal)
+               item = []
+               p+=1
+     print(group)
      for i in listOfWords:
           if i in diagnal or i[::-1] in diagnal:
-               word.append(i) 
+               word.append(i)
      print(f'{word} was found at diagnal ')
      return word
           
-searchLeftDiagonal(words,board)
+searchLeftDiagonal(words,board, row, column)
           
 def searchRightDiagonal(word,board):
 
