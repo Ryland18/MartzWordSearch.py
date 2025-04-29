@@ -92,28 +92,23 @@ def searchLeftDiagonal(listOfWords,board,row, column):
      startingPDL = []
      length = len(row[0])
      
+     
      for r in range(length):
           line = ""
           columline = ""
           for c in range(length):
-               word = f"{(r+c)*10+c:02}"
+               word = f"{(r+c)*(len(row[0]))+c:02}"
                row = int(word[0])
                column = int(word[1])
+               print(words)
+               print(row, column)
                lright = board[row - r][row]
                ldown = board[row - r][column - c]
                columline +=ldown
                line+=lright
           print(line)
           length -=1
-               #row = (board[index][index])
-               #print(row)
-     #     diagnal = ''.join(item)
-     #     group.append(diagnal)
-     #     item = []
-     #print(group)
-     #for i in listOfWords:
-     #     if i in diagnal or i[::-1] in diagnal:
-     #          word.append(i)
+
      #print(f'{word} was found at diagnal ')
      return word
           
