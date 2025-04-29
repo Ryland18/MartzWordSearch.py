@@ -88,30 +88,33 @@ column = R[1]
 searchVerically(words,board)
 
 def searchLeftDiagonal(listOfWords,board,row, column):
-     item = []
-     word = []
-     index = []
      group = []
      startingPDL = []
-     p = 0
-     print(len(row))
+     length = len(row[0])
      
-     while p != len(board):
-          for j in range(len(board)):
-               for i in range(len(row)):
-                    if p < 1:
-                         item.append(board[j][j])
-                    else:
-                         item.append(board[j+p - (len(column)+1)][j+p - len(row)])
-               diagnal = ''.join(item)
-               group.append(diagnal)
-               item = []
-               p+=1
-     print(group)
-     for i in listOfWords:
-          if i in diagnal or i[::-1] in diagnal:
-               word.append(i)
-     print(f'{word} was found at diagnal ')
+     for r in range(length):
+          line = ""
+          columline = ""
+          for c in range(length):
+               word = f"{(r+c)*10+c:02}"
+               row = int(word[0])
+               column = int(word[1])
+               lright = board[row - r][row]
+               ldown = board[row - r][column - c]
+               columline +=ldown
+               line+=lright
+          print(line)
+          length -=1
+               #row = (board[index][index])
+               #print(row)
+     #     diagnal = ''.join(item)
+     #     group.append(diagnal)
+     #     item = []
+     #print(group)
+     #for i in listOfWords:
+     #     if i in diagnal or i[::-1] in diagnal:
+     #          word.append(i)
+     #print(f'{word} was found at diagnal ')
      return word
           
 searchLeftDiagonal(words,board, row, column)
