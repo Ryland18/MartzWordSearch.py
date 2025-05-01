@@ -39,6 +39,9 @@ def revfindRows(columns, item):
      
      return row
 
+def findTrueLoc(item,part):
+     start = item - part
+     return start
 
 
 words = importWords()
@@ -55,6 +58,7 @@ def importBoard():
 importBoard()
 
 def printBoard(board):
+     #made my co-piolet
      col_widths = [max(len(str(item)) for item in col) for col in zip(*board)]
      for row in board:
             print(" | ".join(f"{item:<{col_widths[i]}}" for i, item in enumerate(row)))
@@ -279,27 +283,27 @@ def searchRightDiagonal(listOfWords,board,row,column):
      for i in listOfWords:
           for d in range(len(diagnalRight)):
                if i in diagnalRight[d]:
-                    start = diagnalRight[d].find(i)
-                    end = findEndOfWord(i,start)
+                    part = diagnalRight[d].find(i)
+                    end = findEndOfWord(i,part)
                     Tending.append(end)  
                     Tword.append(i)
                     if d == 0:
                          Tcolumns.append(end)
                     else:
                          Tcolumns.append(findRows(len(diagnalRight[d]),len(i)))
-                    Tgroup.append(d)
-                    TStarting.append(start)
+                    Tgroup.append(findTrueLoc(len(diagnalRight[-1]),(len(diagnalRight[d]))))
+                    TStarting.append(part)
                elif i[::-1] in diagnalRight[d]:
                     part = diagnalRight[d].find(i)
                     end = findRevEndOfWord(i,part,diagnalRight[d])
                     start = chechRev(part,diagnalRight[d])
                     Tending.append(end)  
                     Tword.append(i)
-                    Tgroup.append(d)
+                    Tgroup.append(findTrueLoc(len(diagnalRight[-1]),(len(diagnalRight[d]))))
                     Tcolumns.append(revfindRows(column, len(diagnalRight[d])))
                     TStarting.append(start)
-               #else:
-                    #return print("no words in set of diagnals")
+               #elif not i in diagnalRight[d] or not i[::-1] in diagnalRight[d]:
+               #     return print("no words in set of diagnals")
           for l in range(len(diagnalDown)):
                if i in diagnalDown[l]:
                     start = diagnalDown[l].find(i)
